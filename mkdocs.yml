@@ -44,6 +44,7 @@ theme:
 
 plugins:
   - search
+  - pymdownx.superfences
 
 nav:
   - 简介:

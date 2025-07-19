@@ -14,22 +14,21 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'  # 指定 Python 版本
+          python-version: '3.11'
 
       - name: Install MkDocs dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mkdocs  # 安装 MkDocs 核心
-          # 如需其他插件（如 mkdocs-material），补充安装：
-          # pip install mkdocs-material
+          pip install -r requirements.txt  # 从文件安装所有依赖
+          # pip install mkdocs pymdown-extensions  # 安装 MkDocs 和 pymdownx 扩展
 
       - name: Build MkDocs site
-        run: mkdocs build  # 生成静态站点到 site/ 目录（默认）
+        run: mkdocs build --config-file mkdocs-prod.yml
 
       - name: Deploy to target repo
         uses: peaceiris/actions-gh-pages@v3
         with:
           external_repository: DLUTCI-UIT/UIT-WIKI.github.io
-          publish_dir: ./site  # MkDocs 构建输出目录（默认是 site/）
+          publish_dir: ./site
           publish_branch: main
           token: ${{ secrets.ORG_PAT }}
