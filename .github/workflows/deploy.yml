@@ -11,9 +11,16 @@ jobs:
       - name: Checkout UIT-WIKI repo
         uses: actions/checkout@v4
 
+      # 新增：设置 Ruby 环境（Jekyll 依赖 Ruby）
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'  # 指定与你的项目兼容的 Ruby 版本（如 3.0、3.1、3.2）
+          bundler-cache: true  # 缓存 gems 依赖，加速构建
+
       - name: Build Jekyll site
         run: |
-          bundle install
+          bundle install  # 现在 bundle 命令会被正确识别
           bundle exec jekyll build
 
       - name: Deploy to UIT-WIKI.github.io repo
