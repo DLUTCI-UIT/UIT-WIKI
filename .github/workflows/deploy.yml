@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to target repo
         uses: peaceiris/actions-gh-pages@v3
         with:
-          external_repository: DLUTCI-UIT/UIT-WIKI.github.io
+          external_repository: DLUTCI-UIT/wiki
           publish_dir: ./site
           publish_branch: main
           personal_token: ${{ secrets.DLUTCI_UIT }}
