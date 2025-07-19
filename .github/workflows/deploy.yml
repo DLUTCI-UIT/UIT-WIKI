@@ -8,25 +8,28 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout UIT-WIKI repo
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 新增：设置 Ruby 环境（Jekyll 依赖 Ruby）
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          ruby-version: '3.2'  # 指定与你的项目兼容的 Ruby 版本（如 3.0、3.1、3.2）
-          bundler-cache: true  # 缓存 gems 依赖，加速构建
+          python-version: '3.11'  # 指定 Python 版本
 
-      - name: Build Jekyll site
+      - name: Install MkDocs dependencies
         run: |
-          bundle install  # 现在 bundle 命令会被正确识别
-          bundle exec jekyll build
+          python -m pip install --upgrade pip
+          pip install mkdocs  # 安装 MkDocs 核心
+          # 如需其他插件（如 mkdocs-material），补充安装：
+          # pip install mkdocs-material
 
-      - name: Deploy to UIT-WIKI.github.io repo
+      - name: Build MkDocs site
+        run: mkdocs build  # 生成静态站点到 site/ 目录（默认）
+
+      - name: Deploy to target repo
         uses: peaceiris/actions-gh-pages@v3
         with:
           external_repository: DLUTCI-UIT/UIT-WIKI.github.io
-          publish_dir: ./_site
+          publish_dir: ./site  # MkDocs 构建输出目录（默认是 site/）
           publish_branch: main
           token: ${{ secrets.ORG_PAT }}
