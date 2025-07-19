@@ -1,0 +1,9 @@
+# # .gitattributes 文件内容
+# *.md text eol=lf       # Markdown 文件统一用 LF
+# *.html text eol=lf     # HTML 文件统一用 LF
+# *.js text eol=lf       # JS 文件统一用 LF
+# *.css text eol=lf      # CSS 文件统一用 LF
+# *.yml text eol=lf      # 配置文件统一用 LF
+# *.sh text eol=lf       # 脚本文件强制用 LF
+# *.exe binary           # 二进制文件不转换
+# *.png binary
