@@ -31,4 +31,4 @@ jobs:
           external_repository: DLUTCI-UIT/UIT-WIKI.github.io
           publish_dir: ./site
           publish_branch: main
-          token: ${{ secrets.DLUTCI_UIT }}
+          personal_token: ${{ secrets.DLUTCI_UIT }}
